@@ -27,7 +27,6 @@ jobs:
         # windows server 2019安装的是vs2019，windows server 2016安装的是vs2017
         # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
         include: [
-          {os: windows-2019, arch: x86, msystem: mingw32},
           {os: windows-2019, arch: x64, msystem: mingw64},
         ]
 
