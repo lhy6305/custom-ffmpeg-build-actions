@@ -155,33 +155,6 @@ pushd ffmpeg
 # Standard options
 CONFIGURE_OPTIONS="--prefix=../ffmpeg_install"
 
-# Licensing options
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --enable-gpl --enable-version3 --enable-nonfree"
-
-# Configuration options
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --disable-runtime-cpudetect --disable-autodetect"
-if [[ $LIB_TYPE == "shared" ]]; then
-    CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --enable-shared --disable-static"
-fi
-
-# Program options
-#CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --disable-programs"
-
-# Documentation options
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --disable-doc"
-
-# Component options
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --disable-postproc --disable-network --disable-pthreads"
-
-# Individual component options
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --disable-everything --enable-decoder=h264 --enable-parser=h264 --enable-demuxer=h264"
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --enable-muxer=mp4 --enable-protocol=file"
-
-# External library support
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --disable-zlib --disable-iconv --disable-sdl2"
-# use x264 encoder
-#CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --enable-libx264"
-
 # Toolchain options
 if [[ "$(uname)" == "MSYS_NT"* ]]; then
     CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --toolchain=msvc"
@@ -204,7 +177,7 @@ if [[ "$BUILD_X264" == "true" ]]; then
 fi
 
 # Developer options
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --disable-debug"
+CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --enable-static --disable-shared --disable-everything --disable-ffmpeg --enable-ffplay --enable-sdl --disable-ffprobe --enable-protocol=file,udp --enable-indev=dshow --enable-avcodec --enable-avformat --enable-avdevice --enable-avformat --enable-avfilter --enable-avutil --disable-swresample --disable-swscale --disable-filters --enable-filter=atempo --disable-bzlib --disable-iconv --enable-encoder=pcm_s16le --enable-decoder=opus --enable-demuxer=mpegts,pcm_s16le --disable-fast-unaligned --disable-debug --disable-stripping --enable-pthreads --disable-w32threads --disable-os2threads --disable-safe-bitstream-reader --disable-zlib --disable-d3d11va --disable-dxva2 --disable-mediafoundation --disable-schannel --disable-cuda_llvm --enable-small --disable-doc --disable-large-tests"
 
 ./configure $CONFIGURE_OPTIONS --extra-cflags="$EXTRA_CFLAGS" --extra-ldflags="$EXTRA_LDFLAGS"
 make -j8
