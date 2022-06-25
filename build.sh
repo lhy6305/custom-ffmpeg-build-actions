@@ -101,6 +101,7 @@ case "$(uname)" in
   fi
 
   pacman -S --needed --noconfirm make nasm yasm diffutils pkgconf p7zip
+  pacman -S --needed --noconfirm mingw-w64-x86_64-toolchain mingw64/mingw-w64-x86_64-SDL2 mingw64/mingw-w64-x86_64-SDL2_mixer mingw64/mingw-w64-x86_64-SDL2_image mingw64/mingw-w64-x86_64-SDL2_ttf mingw64/mingw-w64-x86_64-SDL2_net
   if [[ "$(uname)" == "MINGW"* ]]; then
     pacman -S --needed --noconfirm $MINGW_ARCH-gcc
 
