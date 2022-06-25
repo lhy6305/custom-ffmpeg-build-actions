@@ -51,6 +51,9 @@ jobs:
         with:
           msystem: ${{ matrix.msystem }}
           install: git
+      - name: install SDL2
+        if: ${{ runner.os == 'Windows' && github.event.inputs.windows_msystem == 'MSYS' }}
+        run: ./install-sdl2.bat
 
       - name: build on windows MINGW
         if: ${{ runner.os == 'Windows' && github.event.inputs.windows_msystem == 'MINGW' }}
